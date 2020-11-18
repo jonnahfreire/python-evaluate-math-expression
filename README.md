@@ -3,8 +3,9 @@
 ##### github.com/jonnahfreire
 ### Description:
 A simple Python module to evaluates math expressions
-to help programming students on create their first
-Calculator program for example.
+that can helps students on create their
+first Calculator program for example.
+
 
 Instead of using the ```eval() built-in function```, that may
 cause some troubles referring to security problems,

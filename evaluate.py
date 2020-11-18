@@ -1,4 +1,4 @@
-__autor__ = "Jonnas Freire"
+__author__ = "Jonnas Freire"
       
 def separate_expression(expression:str) -> list:
     expression += "+"

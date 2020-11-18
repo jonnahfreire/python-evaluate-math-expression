@@ -35,7 +35,6 @@ def to_int(number_to_int: float) -> int:
 
 def calc(expression:str, detail:bool=False) -> int or float:
     res:list = separate_expression(expression)
-    signals:list = ["/","*","+","-"]
     
     def evaluate(signal:str, i:int) -> int or float:        
         if signal == "/":
@@ -51,7 +50,9 @@ def calc(expression:str, detail:bool=False) -> int or float:
     if len(res) == 1:   
         return to_int(res[0])
             
-    elif len(res) > 1:            
+    elif len(res) > 1:
+        signals:list = ["/","*","+","-"]      
+        
         for signal in signals:
             for __ in range(res.count(signal)):                
                 i = res.index(signal)                   

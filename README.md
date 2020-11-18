@@ -1,5 +1,4 @@
-### Repo name:
-##### python-evaluate-math-expression
+## python-evaluate-math-expression
 ### Autor:
 ##### github.com/jonnahfreire
 ### Description:
@@ -8,7 +7,7 @@ to help programming students on create their first
 Calculator program for example.
 
 Instead of using the ```eval() built-in function```, that may
-cause some troubles refering to security problems,
+cause some troubles referring to security problems,
 you can just import this module in your project and 
 be safe to only evaluate math expressions.
 

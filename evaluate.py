@@ -2,7 +2,7 @@ __author__ = "Jonnas Freire"
       
 def separate_expression(expression:str) -> list:
     expression += "+"
-    signals:list = ["-","+","/","*"]
+    operators:list = ["-","+","/","*"]
     numbers:str = ""
     expression_items:list = []
     
@@ -10,7 +10,7 @@ def separate_expression(expression:str) -> list:
         if item.isspace():
             expression.strip(item)
                            
-        if item in signals:                
+        if item in operators:                
             expression_items.append(to_int(float(numbers.replace(",","."))))
             expression_items.append(item)
             numbers = ""
@@ -61,12 +61,12 @@ def calc(expression:str, detail:bool=False) -> int or float:
         return to_int(res[0])
             
     elif len(res) > 1:
-        signals:list = ["/","*","+","-"]      
+        operators:list = ["/","*","+","-"]      
         
-        for signal in signals:
-            for __ in range(res.count(signal)):                
-                i = res.index(signal)                   
-                result = evaluate(signal, i)
+        for op in operators:
+            for __ in range(res.count(op)):                
+                i = res.index(op)                   
+                result = evaluate(op, i)
                     
                 for __ in range(3):
                     res.pop(i-1)

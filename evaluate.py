@@ -35,7 +35,8 @@ def to_int(number_to_int: float) -> int:
     
 
 def calc(expression:str, detail:bool=False) -> int or float:
-    if not expression: return 0
+    if not expression or expression.isalnum():
+        return 0
 
     res:list = separate_expression(expression)
     

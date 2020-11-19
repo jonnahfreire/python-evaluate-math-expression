@@ -83,8 +83,8 @@ def calc(expression:str, detail:bool=False) -> int or float:
 
     
 def main():
-    import os
-    if os.platform == "win32":
+    import os, sys
+    if sys.platform == "win32":
         os.system("cls")
     else:
         os.system("clear")
@@ -92,6 +92,7 @@ def main():
     print("="*51)
     print(" "*20+"Calculator"+" "*20)
     print("="*51)
+
     exp = input("> ")
     res = calc(exp)
 
@@ -101,6 +102,7 @@ def main():
         print("error: please type an expression!")    
     else:
         print(f"{exp} = {res}\n")
+
     print("="*51)
         
     answer = input("Calculate again? Y/N: ")

@@ -22,14 +22,15 @@ def separate_expression(expression:str) -> list:
     return expression_items
 
 
-def to_int(number_to_int: float) -> int:
-    dot:str = str(number_to_int)[-2] == "."
-    zero:str = str(number_to_int)[-1] == "0"
+def to_int(number_to_int: float) -> int:    
+    if "." in str(number_to_int):    
+        pos = str(number_to_int).index(".")    
+        zero:str = str(number_to_int)[pos+1:] == "0"
 
-    if dot and zero:
-        number = int(number_to_int)
-        return number
-    
+        if zero:
+            number = int(number_to_int)
+            return number
+                
     return number_to_int
     
 

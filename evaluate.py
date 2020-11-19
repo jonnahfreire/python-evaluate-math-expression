@@ -37,7 +37,8 @@ def to_int(number_to_int: float) -> int:
 def calc(expression:str, detail:bool=False) -> int or float:
     from string import ascii_letters        
     
-    if not expression: return None
+    if not expression:
+        return False
    
     for it in expression:
         if it.lower() in ascii_letters[:26]:
@@ -96,6 +97,8 @@ def main():
 
     if res == None:
         print("error: Only expression allowed!")
+    elif not res:
+        print("error: please type an expression!")    
     else:
         print(f"{exp} = {res}\n")
     print("="*51)

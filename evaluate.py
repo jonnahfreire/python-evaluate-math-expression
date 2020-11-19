@@ -35,8 +35,13 @@ def to_int(number_to_int: float) -> int:
     
 
 def calc(expression:str, detail:bool=False) -> int or float:
-    if not expression or expression.isalnum():
-        return 0
+    from string import ascii_letters        
+    
+    if not expression: return None
+   
+    for it in expression:
+        if it.lower() in ascii_letters[:26]:
+            return None 
 
     res:list = separate_expression(expression)
     
@@ -88,8 +93,11 @@ def main():
     print("="*51)
     exp = input("> ")
     res = calc(exp)
-    
-    print(f"{exp} = {res}\n")
+
+    if res == None:
+        print("error: Only expression allowed!")
+    else:
+        print(f"{exp} = {res}\n")
     print("="*51)
         
     answer = input("Calculate again? Y/N: ")

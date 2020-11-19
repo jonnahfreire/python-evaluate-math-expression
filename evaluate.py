@@ -75,19 +75,30 @@ def calc(expression:str, detail:bool=False) -> int or float:
       
         return res[0]
 
-
-
-if __name__ == "__main__":
+    
+def main():
     import os
     if os.platform == "win32":
         os.system("cls")
     else:
         os.system("clear")
+
     print("="*51)
-    exp = input("Calculate an expression: ")
-    print("\nDetails:")
-    print(calc(exp, True))
+    print(" "*20+"Calculator"+" "*20)
     print("="*51)
+    exp = input("> ")
+    res = calc(exp)
+    
+    print(f"{exp} = {res}\n")
+    print("="*51)
+        
+    answer = input("Calculate again? Y/N: ")
+    if answer.upper() == "Y":
+        main()
+
+
+if __name__ == "__main__":
+    main()
     
     
     

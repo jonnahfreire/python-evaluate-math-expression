@@ -25,11 +25,9 @@ def separate_expression(expression:str) -> list:
 def to_int(number_to_int: float) -> int:    
     if "." in str(number_to_int):    
         pos = str(number_to_int).index(".")    
-        zero:str = str(number_to_int)[pos+1:] == "0"
-
-        if zero:
-            number = int(number_to_int)
-            return number
+        
+        if str(number_to_int)[pos+1:] == "0":
+            return int(number_to_int)
                 
     return number_to_int
     
@@ -99,7 +97,7 @@ def main():
     if res == None:
         print("error: Only expression allowed!")
     elif not res:
-        print("error: please type an expression!")    
+        print("error: Please type an expression!")    
     else:
         print(f"{exp} = {res}\n")
 
@@ -112,9 +110,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
-    
-    
-    
-    
-    

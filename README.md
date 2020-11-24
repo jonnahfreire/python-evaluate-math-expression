@@ -1,6 +1,6 @@
 ## python-evaluate-math-expression
 
-### Autor:
+### Author:
 github.com/jonnahfreire
 
 ### Description:

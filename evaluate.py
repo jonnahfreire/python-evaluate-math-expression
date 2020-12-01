@@ -60,8 +60,6 @@ def calc(expression:str, detail:bool=False) -> int or float:
         return to_int(res[0])
             
     elif len(res) > 1:
-        operators:list = ["/","*","+","-"]      
-        
         for op in OPERATORS:
             for __ in range(res.count(op)):                
                 i = res.index(op)                   

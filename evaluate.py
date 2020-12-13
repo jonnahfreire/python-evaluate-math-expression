@@ -20,13 +20,15 @@ def separate_expression(expression:str) -> list:
             numbers += item
              
     expression_items.pop()
-    new_expression = []
+    
+    new_expression:list = []
     for item in expression_items:
         if item in OPERATORS:
             new_expression.append(item)
 
         if item.strip() not in OPERATORS:
             new_expression.append(to_int(float(item.replace(',', '.'))))
+    
     for e in new_expression:
         if e == '': new_expression.remove(e)
         
@@ -43,14 +45,14 @@ def to_int(number_to_int: float) -> int:
     return number_to_int
     
 
-def evaluate(exp:list, signal:str, i:int) -> int or float:        
-        if signal == "/":
+def evaluate(exp:list, oper:str, i:int) -> int or float:        
+        if oper == "/":
             return (exp[i-1]) / (exp[i+1])
-        if signal == "*":
+        if oper == "*":
             return (exp[i-1]) * (exp[i+1])
-        if signal == "+":
+        if oper == "+":
             return (exp[i-1]) + (exp[i+1])
-        if signal == "-":
+        if oper == "-":
             return (exp[i-1]) - (exp[i+1])
 
 
@@ -86,19 +88,19 @@ def calc(expression:str) -> int or float:
             
     elif len(res) > 1:
         if '(' in res:
-            open_parenthesis = res.index('(')
-            close_parenthesis = res.index(')')
+            open_parenthesis:int = res.index('(')
+            close_parenthesis:int = res.index(')')
 
-            new_res = res;
-            parenthesis_expression = new_res[open_parenthesis+1:close_parenthesis]
-            parenthesis_result = operation(parenthesis_expression)
+            new_res:list = res;
+            parenthesis_expression:list = new_res[open_parenthesis+1:close_parenthesis]
+            parenthesis_result:int or float = operation(parenthesis_expression)
 
             for __ in range(open_parenthesis, close_parenthesis+1):
                 new_res.pop(open_parenthesis)
 
             new_res.insert(open_parenthesis, parenthesis_result)
 
-            return operation(new_res
+            return operation(new_res)
         else:
             return operation(res)
 

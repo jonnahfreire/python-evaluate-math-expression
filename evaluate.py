@@ -1,7 +1,7 @@
 __author__ = "Jonnas Freire"
 
-OPERATORS = "/*+-"
-      
+OPERATORS = "(/*+-)"
+
 def separate_expression(expression:str) -> list:
     expression += "+"
     numbers:str = ""
@@ -11,8 +11,8 @@ def separate_expression(expression:str) -> list:
         if item.isspace():
             expression.strip(item)
                            
-        if item in OPERATORS:                
-            expression_items.append(to_int(float(numbers.replace(",","."))))
+        if item in OPERATORS:
+            expression_items.append(to_int(numbers.replace(",",".")))
             expression_items.append(item)
             numbers = ""
               
@@ -20,7 +20,17 @@ def separate_expression(expression:str) -> list:
             numbers += item
              
     expression_items.pop()
-    return expression_items
+    new_expression = []
+    for item in expression_items:
+        if item in OPERATORS:
+            new_expression.append(item)
+
+        if item.strip() not in OPERATORS:
+            new_expression.append(to_int(float(item.replace(',', '.'))))
+    for e in new_expression:
+        if e == '': new_expression.remove(e)
+        
+    return new_expression
 
 
 def to_int(number_to_int: float) -> int:    
@@ -33,6 +43,32 @@ def to_int(number_to_int: float) -> int:
     return number_to_int
     
 
+def evaluate(exp:list, signal:str, i:int) -> int or float:        
+        if signal == "/":
+            return (exp[i-1]) / (exp[i+1])
+        if signal == "*":
+            return (exp[i-1]) * (exp[i+1])
+        if signal == "+":
+            return (exp[i-1]) + (exp[i+1])
+        if signal == "-":
+            return (exp[i-1]) - (exp[i+1])
+
+
+def operation(operation:list) -> int or float:
+    for op in OPERATORS[1:-1]:
+        for __ in range(operation.count(op)):                
+            i = operation.index(op)                   
+            result = evaluate(operation, op, i)
+                
+            for __ in range(3):
+                operation.pop(i-1)
+                                        
+            operation.insert(i-1, to_int(result))
+
+            if len(operation) == 1:
+                return operation[0]
+
+
 def calc(expression:str, detail:bool=False) -> int or float:
     from string import ascii_letters        
     
@@ -42,43 +78,33 @@ def calc(expression:str, detail:bool=False) -> int or float:
     for it in expression:
         if it.lower() in ascii_letters[:26]:
             return None 
-
-    res:list = separate_expression(expression)
     
-    def evaluate(signal:str, i:int) -> int or float:        
-        if signal == "/":
-            return (res[i-1]) / (res[i+1])
-        if signal == "*":
-            return (res[i-1]) * (res[i+1])
-        if signal == "+":
-            return (res[i-1]) + (res[i+1])
-        if signal == "-":
-            return (res[i-1]) - (res[i+1])
-        
-       
+    res:list = separate_expression(expression)
+
     if len(res) == 1:   
         return to_int(res[0])
             
     elif len(res) > 1:
-        for op in OPERATORS:
-            for __ in range(res.count(op)):                
-                i = res.index(op)                   
-                result = evaluate(op, i)
-                    
-                for __ in range(3):
-                    res.pop(i-1)
-                                            
-                res.insert(i-1, to_int(result))
-              
-                if detail:
-                    vs = ""
-                    for a in res:
-                        vs += str(a) + " "                                                                
-                    print(vs)                                                
-      
+        if '(' in res:
+            open_parenthesis = res.index('(')
+            close_parenthesis = res.index(')')
+
+            new_res = res;
+            parenthesis_expression = new_res[open_parenthesis+1:close_parenthesis]
+            parenthesis_result = operation(parenthesis_expression)
+
+            for __ in range(open_parenthesis, close_parenthesis+1):
+                new_res.pop(open_parenthesis)
+
+            new_res.insert(open_parenthesis, parenthesis_result)
+
+            return operation(new_res
+        else:
+            return operation(res)
+
         return res[0]
 
-    
+
 def main():
     import os, sys
     if sys.platform == "win32":
@@ -98,7 +124,7 @@ def main():
     elif not res:
         print("error: Please type an expression!")    
     else:
-        print(f"{exp} = {res}\n")
+        print(f"{exp} = {str(res).replace('.', ',')}\n")
 
     print("="*51)
         
@@ -109,3 +135,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -87,7 +87,7 @@ def calc(expression:str) -> int or float:
         return to_int(res[0])
             
     elif len(res) > 1:
-        if '(' in res:
+        while '(' in res:
             open_parenthesis:int = res.index('(')
             close_parenthesis:int = res.index(')')
 
@@ -99,8 +99,8 @@ def calc(expression:str) -> int or float:
                 new_res.pop(open_parenthesis)
 
             new_res.insert(open_parenthesis, parenthesis_result)
-
-            return operation(new_res)
+            if not '(' in new_res:
+                return operation(new_res)
         else:
             return operation(res)
 

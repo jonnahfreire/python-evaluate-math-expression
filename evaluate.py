@@ -69,7 +69,7 @@ def operation(operation:list) -> int or float:
                 return operation[0]
 
 
-def calc(expression:str, detail:bool=False) -> int or float:
+def calc(expression:str) -> int or float:
     from string import ascii_letters        
     
     if not expression:

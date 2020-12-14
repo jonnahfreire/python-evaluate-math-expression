@@ -15,12 +15,10 @@ def separate_expression(expression:str) -> list:
             expression_items.append(to_int(numbers.replace(",",".")))
             expression_items.append(item)
             numbers = ""
-              
         else:
             numbers += item
              
     expression_items.pop()
-    
     new_expression:list = []
     for item in expression_items:
         if item in OPERATORS:

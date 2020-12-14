@@ -90,21 +90,16 @@ def calc(expression:str) -> int or float:
         while '(' in res:
             open_parenthesis:int = res.index('(')
             close_parenthesis:int = res.index(')')
-
-            new_res:list = res;
-            parenthesis_expression:list = new_res[open_parenthesis+1:close_parenthesis]
+                
+            parenthesis_expression:list = res[open_parenthesis+1:close_parenthesis]
             parenthesis_result:int or float = operation(parenthesis_expression)
 
             for __ in range(open_parenthesis, close_parenthesis+1):
-                new_res.pop(open_parenthesis)
+                res.pop(open_parenthesis)
 
-            new_res.insert(open_parenthesis, parenthesis_result)
-            if not '(' in new_res:
-                return operation(new_res)
-        else:
-            return operation(res)
-
-        return res[0]
+            res.insert(open_parenthesis, parenthesis_result)
+            
+        return operation(res)
 
 
 def main():

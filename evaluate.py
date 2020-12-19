@@ -43,15 +43,17 @@ def to_int(number_to_int: float) -> int:
     return number_to_int
     
 
-def evaluate(exp:list, oper:str, i:int) -> int or float:        
-        if oper == "/":
-            return (exp[i-1]) / (exp[i+1])
-        if oper == "*":
-            return (exp[i-1]) * (exp[i+1])
-        if oper == "+":
-            return (exp[i-1]) + (exp[i+1])
-        if oper == "-":
-            return (exp[i-1]) - (exp[i+1])
+def evaluate(exp:list, operator:str, i:int) -> int or float:        
+    f_num = i - 1
+    s_num = i + 1
+    operations = {
+        "/": exp[f_num] / exp[s_num],
+        "*": exp[f_num] * exp[s_num],
+        "+": exp[f_num] + exp[s_num],
+        "-": exp[f_num] - exp[s_num]
+    } 
+   
+    return operations[operator]
 
 
 def operation(operation:list) -> int or float:

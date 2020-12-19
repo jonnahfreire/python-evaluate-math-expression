@@ -91,9 +91,7 @@ def calc(expression:str) -> int or float:
                 parenthesis_expression:list = res[open_parenthesis+1:close_parenthesis]
                 parenthesis_result:int or float = operation(parenthesis_expression)
 
-                for __ in range(open_parenthesis, close_parenthesis+1):
-                    res.pop(open_parenthesis)
-
+                [res.pop(open_parenthesis) for __ in range(open_parenthesis, close_parenthesis+1)]                   
                 res.insert(open_parenthesis, parenthesis_result)
             
             return operation(res)

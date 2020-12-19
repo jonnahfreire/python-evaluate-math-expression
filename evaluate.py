@@ -27,9 +27,7 @@ def separate_expression(expression:str) -> list:
         if item.strip() not in OPERATORS:
             new_expression.append(to_int(float(item.replace(',', '.'))))
     
-    for e in new_expression:
-        if e == '': new_expression.remove(e)
-        
+    new_expression = [x for x in new_expression if x != ''] 
     return new_expression
 
 
@@ -62,9 +60,7 @@ def operation(operation:list) -> int or float:
             i = operation.index(op)                   
             result = evaluate(operation, op, i)
                 
-            for __ in range(3):
-                operation.pop(i-1)
-                                        
+            [operation.pop(i-1) for __ in range(3)]                                     
             operation.insert(i-1, to_int(result))
 
             if len(operation) == 1:
@@ -87,19 +83,22 @@ def calc(expression:str) -> int or float:
         return to_int(res[0])
             
     elif len(res) > 1:
-        while '(' in res:
-            open_parenthesis:int = res.index('(')
-            close_parenthesis:int = res.index(')')
+        try:
+            while '(' in res:
+                open_parenthesis:int = res.index('(')
+                close_parenthesis:int = res.index(')')
                 
-            parenthesis_expression:list = res[open_parenthesis+1:close_parenthesis]
-            parenthesis_result:int or float = operation(parenthesis_expression)
+                parenthesis_expression:list = res[open_parenthesis+1:close_parenthesis]
+                parenthesis_result:int or float = operation(parenthesis_expression)
 
-            for __ in range(open_parenthesis, close_parenthesis+1):
-                res.pop(open_parenthesis)
+                for __ in range(open_parenthesis, close_parenthesis+1):
+                    res.pop(open_parenthesis)
 
-            res.insert(open_parenthesis, parenthesis_result)
+                res.insert(open_parenthesis, parenthesis_result)
             
-        return operation(res)
+            return operation(res)
+        except ValueError:
+            print('\nThere's something wrong, please verify the expression.')
 
 
 def main():

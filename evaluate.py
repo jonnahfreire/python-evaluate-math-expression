@@ -8,13 +8,17 @@ def separate_expression(expression:str) -> list:
     expression_items:list = []
     
     for item in expression:
-        if item.isspace():
-            expression.strip(item)
-                           
+        if item.isspace(): expression.strip(item)
+        
+        first_element_len:bool = len(expression[expression.index(item)]) == 0
+        first_element_is_open_parenthesis:bool = expression[expression.index(item)-1] == '('                
         if item in OPERATORS:
-            expression_items.append(to_int(numbers.replace(",",".")))
-            expression_items.append(item)
-            numbers = ""
+            if item == '-' and first_element_len or first_element_is_open_parenthesis:
+                numbers = item
+            else:
+                expression_items.append(to_int(numbers.replace(",",".")))
+                expression_items.append(item)
+                numbers = ""
         else:
             numbers += item
              

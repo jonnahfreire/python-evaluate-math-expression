@@ -94,6 +94,8 @@ def calc(expression:str) -> int or float:
                 
                 parenthesis_expression:list = res[open_parenthesis+1:close_parenthesis]
                 parenthesis_result:int or float = operation(parenthesis_expression)
+                if len(parenthesis_expression) == 1 and '-' in str(parenthesis_expression):
+                    parenthesis_result = parenthesis_expression[0]
 
                 [res.pop(open_parenthesis) for __ in range(open_parenthesis, close_parenthesis+1)]                   
                 res.insert(open_parenthesis, parenthesis_result)

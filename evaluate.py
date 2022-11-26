@@ -102,7 +102,7 @@ def calc(expression:str) -> int or float:
             
             return operation(res)
         except ValueError:
-            print('\nThere's something wrong, please verify the expression.')
+            print("\nThere's something wrong, please verify the expression.")
 
 
 def main():
